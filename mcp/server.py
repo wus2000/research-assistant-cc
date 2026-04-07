@@ -106,14 +106,11 @@ def search_papers(
     year_min: int = 0,
     sources: str = "openalex,semantic_scholar,arxiv",
     session_id: str = "",
-    include_abstract: bool = False,
-    abstract_max_chars: int = 200,
 ) -> str:
     """Search academic papers across OpenAlex, Semantic Scholar, and arXiv.
 
     Returns deduplicated results sorted by citation count.
-    Abstracts are truncated by default to keep output within token limits.
-    Full abstracts are always saved to session context regardless of truncation.
+    If session_id is provided, results are also saved to that session's context.
 
     Args:
         query: Search query (e.g. "vision transformer pruning")
@@ -121,29 +118,20 @@ def search_papers(
         year_min: Minimum publication year (0 = no filter)
         sources: Comma-separated sources: openalex, semantic_scholar, arxiv
         session_id: Session ID for context isolation (from research_session_new)
-        include_abstract: If True, return full abstracts (warning: may exceed token limit)
-        abstract_max_chars: Max abstract length when include_abstract=False (default 200)
     """
     source_tuple = tuple(s.strip() for s in sources.split(","))
     result_json = run_search(query, limit=limit, year_min=year_min, sources=source_tuple)
-    papers = json.loads(result_json)
 
-    # Always persist FULL results to session context (no truncation)
+    # Persist to session context if session_id provided
     if session_id:
         ctx = get_context_path(session_id)
         lit_file = ctx / "literature.jsonl"
+        papers = json.loads(result_json)
         with lit_file.open("a", encoding="utf-8") as f:
             for paper in papers:
                 f.write(json.dumps(paper, ensure_ascii=False) + "\n")
 
-    # Truncate abstracts for MCP response to stay within token limits
-    if not include_abstract:
-        for paper in papers:
-            abstract = paper.get("abstract", "")
-            if len(abstract) > abstract_max_chars:
-                paper["abstract"] = abstract[:abstract_max_chars] + "..."
-
-    return json.dumps(papers, indent=2, ensure_ascii=False)
+    return result_json
 
 
 @mcp.tool()
