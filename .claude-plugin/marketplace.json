@@ -1,0 +1,15 @@
+{
+  "name": "research-assistant-cc",
+  "description": "AI Research Assistant for Claude Code — academic search, novelty assessment, experiment design, and session-isolated context management",
+  "owner": {
+    "name": "WuShang",
+    "email": "wus2020@aliyun.com"
+  },
+  "plugins": [
+    {
+      "name": "research-assistant",
+      "source": "./",
+      "category": "research"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.researchclaw_cache/
+context/sessions/
+context/current
+*.egg-info/

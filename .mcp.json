@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "research-assistant": {
+      "command": "/opt/homebrew/Caskroom/miniforge/base/envs/clawailab/bin/python",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/mcp/server.py"
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "research-assistant",
+  "version": "0.2.0",
+  "description": "AI research assistant with academic search, novelty assessment, experiment design, and session-isolated context management.",
+  "author": {
+    "name": "WuShang"
+  },
+  "commands": "./commands",
+  "agents": "./agents",
+  "skills": "./skills",
+  "mcpServers": "./.mcp.json"
+}
