@@ -5,8 +5,25 @@
   "author": {
     "name": "WuShang"
   },
-  "commands": "./commands",
-  "agents": "./agents",
-  "skills": "./skills",
+  "homepage": "https://github.com/wus2000/research-assistant-cc",
+  "repository": "https://github.com/wus2000/research-assistant-cc",
+  "license": "MIT",
+  "keywords": [
+    "research",
+    "academic-search",
+    "literature-review",
+    "experiment-design",
+    "novelty-assessment"
+  ],
+  "commands": [
+    "./commands/"
+  ],
+  "agents": [
+    "./agents/literature-reviewer.md",
+    "./agents/experiment-advisor.md"
+  ],
+  "skills": [
+    "./skills/"
+  ],
   "mcpServers": "./.mcp.json"
 }
