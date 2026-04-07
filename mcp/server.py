@@ -102,7 +102,7 @@ def research_session_current() -> str:
 @mcp.tool()
 def search_papers(
     query: str,
-    limit: int = 10,
+    limit: int = 5,
     year_min: int = 0,
     sources: str = "openalex,semantic_scholar,arxiv",
     session_id: str = "",
